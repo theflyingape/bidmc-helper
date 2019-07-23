@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+
+  "name": "BIDMC Helper extension",
+  "short_name": "Helper",
+  "description": "Keeping our managed Chrome working great!",
+  "version": "1.0.0",
+
+  "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
+  "icons": {
+    "128": "icon-128.png",
+    "256": "icon-256.png"
+  },
+
+  "background": {
+    "scripts": [ "background.js" ],
+    "persistent": true
+  },
+  "browser_action": {
+    "default_title": "BIDMC Helper",
+    "default_popup": "options.html"
+	},
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+
+  "minimum_chrome_version": "69",
+  "permissions": [
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ]
+}
