@@ -3,8 +3,8 @@
 
   "name": "BIDMC Helper extension",
   "short_name": "Helper",
-  "description": "Keeping our managed Chrome working great!",
-  "version": "1.0.0",
+  "description": "Keep our managed Chrome working great!",
+  "version": "1.0.1",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
@@ -31,5 +31,8 @@
     "webRequest",
     "webRequestBlocking",
     "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "config.json"
   ]
 }
