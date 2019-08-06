@@ -4,50 +4,71 @@
 
 let config = {
     NewTab: '',
-    UserAgent: []
+    UserAgent: [],
+    webOMR: false
 };
 
 const url = chrome.runtime.getURL("config.json");
 
-fetch(url)
-    .then((response) => response.json()
-    .then((json) => { config = json; console.log(config); }));
+fetch(url).then((response) => response.json().then((json) => {
 
-let badge = false;
-chrome.browserAction.setBadgeText({text: ''});
-const urls = [ 'atriushealth.org' ];
-const UserAgent =
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36';
+config = json;
+console.log(config);
 
 //  Helper: User-Agent masking tape for older EHRs and Patient portals
-chrome.webRequest.onBeforeSendHeaders.addListener(
-    function(details) {
-console.log(badge);
-        if (badge) {
-            chrome.browserAction.setBadgeText({text: ''});
-            badge = false;
-        }
-        if (/^(http|https):\/\/?.*/i.test(details.url)) {
-            var hostname = (new URL(details.url)).hostname;
-//          for (var url in urls) {
-            for (var url in config.UserAgent) {
-//              if (hostname.endsWith(urls[url])) {
-                if (hostname.endsWith(config.UserAgent[url].domain)) {
-                    for (var i = 0; i < details.requestHeaders.length; ++i) {
-                        if (details.requestHeaders[i].name === 'User-Agent') {
-                            //details.requestHeaders.splice(i, 1);
-                            //details.requestHeaders[i].value = UserAgent;
-                            details.requestHeaders[i].value = config.UserAgent[url].value;
-                            chrome.browserAction.setBadgeText({text: 'PC'});
-                            badge = true;
-                            break;
+if (config.UserAgent && config.UserAgent.length) {
+    let badge = false;
+    chrome.browserAction.setBadgeText({text: ''});
+
+    chrome.webRequest.onBeforeSendHeaders.addListener(
+        function(details) {
+            if (badge) {
+                chrome.browserAction.setBadgeText({text: ''});
+                badge = false;
+            }
+            if (/^(http|https):\/\/?.*/i.test(details.url)) {
+                var hostname = (new URL(details.url)).hostname;
+                for (var url in config.UserAgent) {
+                    if (hostname.endsWith(config.UserAgent[url].domain)) {
+                        for (var i = 0; i < details.requestHeaders.length; ++i) {
+                            if (details.requestHeaders[i].name === 'User-Agent') {
+                                //details.requestHeaders.splice(i, 1);
+                                //details.requestHeaders[i].value = UserAgent;
+                                details.requestHeaders[i].value = config.UserAgent[url].value;
+                                chrome.browserAction.setBadgeText({text: 'PC'});
+                                badge = true;
+                                break;
+                            }
                         }
                     }
                 }
             }
+        return { requestHeaders: details.requestHeaders };
+        },
+        { urls: [ "<all_urls>" ] },
+        [ "blocking", "requestHeaders" ]
+    );
+}
+
+/*
+//  Helper: hide patient "header" frameset in window for when user wants to print
+if (config.webOMR) {
+console.log('webOMR on');
+    chrome.tabs.executeScript({ code:`
+        let header = document.getElementsByName('header');
+        if (header) {
+            window.onbeforeprint = function(event) {
+                let header = document.getElementsByName('header');
+                if (header) header.hidden = true;
+            };
+            window.onafterprint = function(event) {
+                let header = document.getElementsByName('header');
+                if (header) header.hidden = false;
+            };
         }
-      return { requestHeaders: details.requestHeaders };
-    },
-    { urls: [ "<all_urls>" ] },
-    [ "blocking", "requestHeaders" ]
-);
+    `});
+}
+*/
+
+//  end of config loaded
+}));

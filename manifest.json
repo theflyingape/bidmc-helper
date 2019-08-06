@@ -4,7 +4,7 @@
   "name": "BIDMC Helper extension",
   "short_name": "Helper",
   "description": "Keep our managed Chrome working great!",
-  "version": "1.0.1",
+  "version": "1.0.2",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
@@ -16,6 +16,13 @@
     "scripts": [ "background.js" ],
     "persistent": true
   },
+  "content_scripts": [
+    {
+      "matches": [ "https://holmes-stage.caregroup.org/*"],
+      "js": [ "headerless-print.js" ],
+      "run_at": "document_idle"
+    }
+  ],
   "browser_action": {
     "default_title": "BIDMC Helper",
     "default_popup": "options.html"
@@ -27,12 +34,14 @@
 
   "minimum_chrome_version": "69",
   "permissions": [
+    "activeTab",
     "tabs",
     "webRequest",
     "webRequestBlocking",
     "<all_urls>"
   ],
   "web_accessible_resources": [
-    "config.json"
+    "config.json",
+    "*.png"
   ]
 }
