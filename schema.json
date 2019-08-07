@@ -1,0 +1,22 @@
+{
+    "type": "object",
+    "properties": {
+        "UserAgent": {
+            "title": "HTTP header User-Agent masking",
+            "description": "Override browser identification to the specified domain(s)",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "domain": { "type": "string" },
+                    "value": { "type": "string" }
+                }
+            }
+        },
+        "webOMRframePrinting": {
+            "title": "Inject print action icon into header frame",
+            "description": "Allows user's print request to include all pages in the main frame",
+            "type": "boolean"
+        }
+    }
+}

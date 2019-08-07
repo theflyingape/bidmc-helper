@@ -18,7 +18,7 @@
   },
   "content_scripts": [
     {
-      "matches": [ "https://holmes-stage.caregroup.org/*"],
+      "matches": [ "https://holmes-stage.caregroup.org/*" ],
       "js": [ "headerless-print.js" ],
       "run_at": "document_idle"
     }
@@ -40,6 +40,9 @@
     "webRequestBlocking",
     "<all_urls>"
   ],
+  "storage": {
+    "managed_schema": "schema.json"
+  },
   "web_accessible_resources": [
     "config.json",
     "*.png"
