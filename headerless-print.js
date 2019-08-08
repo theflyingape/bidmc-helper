@@ -22,6 +22,7 @@ if (header) {
     form.insertAdjacentHTML('beforebegin', `
 <div style="float:right;"><img style="height:100%; margin:auto; object-fit:contain;" src="${print}" title="Print main frame below" onclick="top.frames['main'].window.print();"></a></div>
 `);
+    form.setAttribute('style', 'overflow:hidden;');
     header.addEventListener("keydown", function (event) {
         let main = top.frames['main'];
         if (main && event.ctrlKey && event.keyCode == 80) {

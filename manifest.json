@@ -4,7 +4,7 @@
   "name": "BIDMC Helper extension",
   "short_name": "Helper",
   "description": "Keep our managed Chrome working great!",
-  "version": "1.0.2",
+  "version": "1.0.3",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
