@@ -1,4 +1,4 @@
-const print = chrome.runtime.getURL("print-button.png");
+const print = chrome.runtime.getURL("./assets/print-button.png");
 
 function CtrlP() {
     console.log("Ctrl/P pressed");

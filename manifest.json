@@ -1,15 +1,15 @@
 {
   "manifest_version": 2,
 
-  "name": "BIDMC Helper extension",
+  "name": "BIDMC Helper",
   "short_name": "Helper",
   "description": "Keep our managed Chrome working great!",
-  "version": "1.0.3",
+  "version": "1.0.4",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
-    "128": "icon-128.png",
-    "256": "icon-256.png"
+    "128": "./assets/icon-128t.png",
+    "256": "./assets/icon-256t.png"
   },
 
   "background": {
@@ -18,23 +18,27 @@
   },
   "content_scripts": [
     {
-      "matches": [ "https://holmes-stage.caregroup.org/*" ],
-      "js": [ "headerless-print.js" ],
+      "matches": [
+        "https://holmes-stage.caregroup.org/*",
+        "https://holmes-test.caregroup.org/*",
+        "https://holmes.caregroup.org/*"
+      ],
+      "js": [ "webOMR-framePrint.js" ],
       "run_at": "document_idle"
     }
   ],
   "browser_action": {
-    "default_title": "BIDMC Helper",
     "default_popup": "options.html"
 	},
   "options_ui": {
     "page": "options.html",
-    "open_in_tab": true
+    "open_in_tab": false
   },
 
   "minimum_chrome_version": "69",
   "permissions": [
     "activeTab",
+    "system.storage",
     "tabs",
     "webRequest",
     "webRequestBlocking",
@@ -44,7 +48,6 @@
     "managed_schema": "schema.json"
   },
   "web_accessible_resources": [
-    "config.json",
-    "*.png"
+    "./assets/*"
   ]
 }

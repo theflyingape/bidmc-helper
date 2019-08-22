@@ -1,0 +1,19 @@
+{
+    "features": {
+        "buttons": { "text": "add a set of option menu buttons" },
+        "newtab": { "text": "set URL on user's request for a new tab" },
+        "UserAgent": { "text": "mask HTTP User-Agent string for specified domain" },
+        "webOMRframePrint": { "text": "inject print action icon into our webOMR header frame" }
+    },
+    "buttons": [
+        { "caption": "Department of Emergency Medicine", "url":"https://edmenu.bidmc.harvard.edu/" }
+    ],
+    "newtab": "https://portal.bidmc.org",
+    "UserAgent": [
+        {
+            "domain":"atriushealth.org",
+            "value":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.142 Safari/537.36"
+        }
+    ],
+    "webOMRframePrint": true
+}

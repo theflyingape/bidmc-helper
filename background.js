@@ -2,24 +2,23 @@
  *  BIDMC managed Chrome OS - Helper extension  *
 \************************************************/
 
-let config = {
-    NewTab: '',
-    UserAgent: [],
-    webOMR: false
-};
+let badge = false;
 
-const url = chrome.runtime.getURL("config.json");
+chrome.storage.managed.get(function(policy) {
 
-fetch(url).then((response) => response.json().then((json) => {
-
-config = json;
-console.log(config);
+//  Helper: new tab page override
+if (policy.newtab && policy.newtab.length) {
+    console.log('feature newtab: ', policy.newtab);
+    chrome.tabs.onCreated.addListener(function (tab) {
+    if (tab.url === 'chrome://newtab/') {
+      chrome.tabs.update(tab.id, {url:policy.newtab});
+    }
+  });
+}
 
 //  Helper: User-Agent masking tape for older EHRs and Patient portals
-if (config.UserAgent && config.UserAgent.length) {
-    let badge = false;
-    chrome.browserAction.setBadgeText({text: ''});
-
+if (policy.UserAgent && policy.UserAgent.length) {
+    console.log('feature UserAgent: ', policy.UserAgent);
     chrome.webRequest.onBeforeSendHeaders.addListener(
         function(details) {
             if (badge) {
@@ -45,10 +44,34 @@ if (config.UserAgent && config.UserAgent.length) {
             }
         return { requestHeaders: details.requestHeaders };
         },
-        { urls: [ "<all_urls>" ] },
-        [ "blocking", "requestHeaders" ]
+            { urls: [ "<all_urls>" ] },
+            [ "blocking", "requestHeaders" ]
     );
 }
+
+});
+
+/*
+chrome.browserAction.onClicked.addListener(function(tab) {
+    chrome.tabs.executeScript(
+      tab.id,
+      {code: 'window.print();'});
+});
+chrome.browserAction.setPopup({popup:"options.html"});
+*/
+
+/*
+let config = {
+    NewTab: '',
+    UserAgent: [],
+    webOMR: false
+};
+const url = chrome.runtime.getURL("./assets/config.json");
+fetch(url).then((response) => response.json().then((json) => {
+config = json;
+console.log(config);
+*/
+
 
 /*
 //  Helper: hide patient "header" frameset in window for when user wants to print
@@ -68,7 +91,7 @@ console.log('webOMR on');
         }
     `});
 }
-*/
 
-//  end of config loaded
+// end of config loaded
 }));
+*/
