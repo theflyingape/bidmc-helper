@@ -26,14 +26,14 @@ if (policy.UserAgent && policy.UserAgent.length) {
                 badge = false;
             }
             if (/^(http|https):\/\/?.*/i.test(details.url)) {
-                var hostname = (new URL(details.url)).hostname;
-                for (var url in config.UserAgent) {
-                    if (hostname.endsWith(config.UserAgent[url].domain)) {
-                        for (var i = 0; i < details.requestHeaders.length; ++i) {
+                let hostname = (new URL(details.url)).hostname;
+                for (let url in policy.UserAgent) {
+                    if (hostname.endsWith(policy.UserAgent[url].domain)) {
+                        for (let i = 0; i < details.requestHeaders.length; ++i) {
                             if (details.requestHeaders[i].name === 'User-Agent') {
                                 //details.requestHeaders.splice(i, 1);
                                 //details.requestHeaders[i].value = UserAgent;
-                                details.requestHeaders[i].value = config.UserAgent[url].value;
+                                details.requestHeaders[i].value = policy.UserAgent[url].value;
                                 chrome.browserAction.setBadgeText({text: 'PC'});
                                 badge = true;
                                 break;

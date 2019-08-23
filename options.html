@@ -6,17 +6,47 @@ body {
     white-space: nowrap;
     width: 480px;
 }
+button {
+    background-image: linear-gradient(to bottom, ghostwhite, lightgray);
+    border: solid lightgray;
+    border-radius: 8px 3px 2px 5px;
+    box-shadow: 1px 3px 5px gray;
+    color: darkslateblue;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 150%;
+    padding-top: 0.4em;
+    padding-left: 0.3em;
+    padding-bottom: 0.4em;
+    padding-right: 0.3em;
+    border-width: 2px;
+    outline: 0;
+    text-decoration: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+button:active {
+    box-shadow: 2px 5px 8px slateblue;
+    transform: scale(1.20) translateY(-0.2em);
+}
+button:hover {
+    background-image: linear-gradient(to bottom, ghostwhite, mediumslateblue);
+    border: solid slateblue;
+    border-width: 1px 3px 3px 1px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px darkslateblue;
+}
 </style>
 </head>
 <body>
-<div id="buttons"></div>
-<div id="features"></div>
+<div id="buttons"><p><button>Menu</button></p></div>
 <div style="float:right;"><a href="https://bilh.org/" target="_blank">
 <img style="height:64px;" src="./assets/icon-128t.png" title="Beth Israel Lahey Health">
 </a></div>
 <br>
 <hr style="display:block; border:0px; height:10px; background-image:url('./assets/bilh-frackle.png'); background-size:cover">
-<h3 id="banner"></h3>
+<div id="features"></div>
 </body>
 <script src="options.js"></script>
 </html>
