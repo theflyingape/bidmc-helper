@@ -4,20 +4,19 @@
   "name": "BIDMC Helper",
   "short_name": "Helper",
   "description": "Keep our managed Chrome working great!",
-  "version": "1.0.4",
+  "version": "1.0.5",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
     "128": "./assets/icon-128t.png",
-    "256": "./assets/icon-256t.png"
+    "256": "./assets/icon-256.png"
   },
 
   "background": {
     "scripts": [ "background.js" ],
     "persistent": true
   },
-  "content_scripts": [
-    {
+  "content_scripts": [{
       "matches": [
         "https://holmes-stage.caregroup.org/*",
         "https://holmes-test.caregroup.org/*",
@@ -25,8 +24,7 @@
       ],
       "js": [ "webOMR-framePrint.js" ],
       "run_at": "document_idle"
-    }
-  ],
+  }],
   "browser_action": {
     "default_popup": "options.html"
 	},

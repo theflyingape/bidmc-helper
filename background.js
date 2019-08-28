@@ -6,6 +6,8 @@ let badge = false;
 
 chrome.storage.managed.get(function(policy) {
 
+console.log('JSON configuration background: ', JSON.stringify(policy));
+
 //  Helper: new tab page override
 if (policy.newtab && policy.newtab.length) {
     console.log('feature newtab: ', policy.newtab);
@@ -51,6 +53,7 @@ if (policy.UserAgent && policy.UserAgent.length) {
 
 });
 
+//  defunct trial code
 /*
 chrome.browserAction.onClicked.addListener(function(tab) {
     chrome.tabs.executeScript(
@@ -71,7 +74,6 @@ fetch(url).then((response) => response.json().then((json) => {
 config = json;
 console.log(config);
 */
-
 
 /*
 //  Helper: hide patient "header" frameset in window for when user wants to print

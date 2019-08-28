@@ -4,7 +4,7 @@ function CtrlP() {
     console.log("Ctrl/P pressed");
     let main = top.frames['main'];
     if (main) {
-        var sel = main.getSelection();
+        let sel = main.getSelection();
     /*  unneeded
         sel.removeAllRanges();
         var range = main.document.createRange();
@@ -66,7 +66,7 @@ window.onbeforeprint = function(event) {
 window.onafterprint = function(event) {
     let main = top.frames['main'];
     if (main) {
-        var sel = main.getSelection();
+        let sel = main.getSelection();
         sel.removeAllRanges();
     }
 };
