@@ -3,13 +3,12 @@
 
   "name": "BIDMC Helper",
   "short_name": "Helper",
-  "description": "Keep our managed Chrome working great!",
-  "version": "1.0.5",
+  "description": "Our business extension for Google managed Chrome stations in support of our EHR systems",
+  "version": "1.0.6",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
-    "128": "./assets/icon-128t.png",
-    "256": "./assets/icon-256.png"
+    "128": "./assets/icon-128.png"
   },
 
   "background": {
@@ -32,6 +31,9 @@
     "page": "options.html",
     "open_in_tab": false
   },
+  "storage": {
+    "managed_schema": "schema.json"
+  },
 
   "minimum_chrome_version": "69",
   "permissions": [
@@ -42,10 +44,8 @@
     "webRequestBlocking",
     "<all_urls>"
   ],
-  "storage": {
-    "managed_schema": "schema.json"
-  },
   "web_accessible_resources": [
-    "./assets/*"
+    "assets/*.json",
+    "assets/*.png"
   ]
 }
