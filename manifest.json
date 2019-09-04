@@ -4,11 +4,12 @@
   "name": "BIDMC Helper",
   "short_name": "Helper",
   "description": "Our business extension for Google managed Chrome stations in support of our EHR systems",
-  "version": "1.0.6",
+  "version": "1.0.7",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
-    "128": "./assets/icon-128.png"
+    "128": "assets/icon-128.png",
+    "256": "assets/icon-256.png"
   },
 
   "background": {
