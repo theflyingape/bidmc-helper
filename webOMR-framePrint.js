@@ -7,7 +7,7 @@ let header = top.frames['header'];
 if (header) {
     var form = header.document.getElementsByName('form')[0];
     form.insertAdjacentHTML('beforebegin', `
-<div style="float:right;"><img style="height:100%; margin:auto; object-fit:contain;" src="${chrome.runtime.getURL("assets/print-button.png")}" title="Print frame below" onclick="top.frames['main'].window.print();"></a></div>
+<div style="float:right;"><img id="printer" style="height:100%; margin:auto; object-fit:contain;" src="${chrome.runtime.getURL("assets/print-button.png")}" title="Print frame below" onclick="top.frames['main'].window.print();"></a></div>
 `);
     form.setAttribute('style', 'overflow:hidden;');
 }
