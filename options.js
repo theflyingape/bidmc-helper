@@ -1,6 +1,14 @@
 //  Options: managed via Admin storage schema
+
+function menuButton() {
+    chrome.tabs.create({ url:this.value });
+}
+
 const url = chrome.runtime.getURL("assets/config.json");
 fetch(url).then((response) => response.json().then((config) => {
+    let buttons = document.getElementById('buttons');
+    buttons.innerHTML +=`<p><button id=portal value="https://portal.bidmc.org">BIDMC Portal</button></p>`;
+    document.getElementById('portal').addEventListener('click', menuButton);
     chrome.storage.managed.get(function(policy) {
         console.log('JSON configuration options: ', JSON.stringify(policy));
         //  compare config's built-in features with the loaded extension policy
@@ -12,11 +20,12 @@ fetch(url).then((response) => response.json().then((config) => {
         features.innerHTML += '</ul>';
         //  enumerate any managed buttons first
         if (policy.buttons && policy.buttons.length) {
-            let buttons = document.getElementById('buttons');
             for (i in policy.buttons) {
                 buttons.innerHTML +=
-                    `<p><button onclick="chrome.tabs.create({ url:'${policy.buttons[i].url}' });">${policy.buttons[i].caption}</button></p>`;
+                    `<p><button id="button${i}" value="${policy.buttons[i].url}">${policy.buttons[i].caption}</button></p>`;
             }
+            for (i in policy.buttons)
+                document.getElementById(`button${i}`).addEventListener('click', menuButton);
         }
     });
 }));
