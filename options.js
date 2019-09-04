@@ -1,5 +1,5 @@
 //  Options: managed via Admin storage schema
-const url = chrome.runtime.getURL("./assets/config.json");
+const url = chrome.runtime.getURL("assets/config.json");
 fetch(url).then((response) => response.json().then((config) => {
     chrome.storage.managed.get(function(policy) {
         console.log('JSON configuration options: ', JSON.stringify(policy));
