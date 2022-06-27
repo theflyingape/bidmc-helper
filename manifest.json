@@ -1,10 +1,10 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "BIDMC Helper",
   "short_name": "Helper",
   "description": "Our business extension for Google managed Chrome stations in support of our EHR systems",
-  "version": "1.0.12",
+  "version": "1.0.13",
 
   "author": "Robert Hurst <rhurst@bidmc.harvard.edu>",
   "icons": {
@@ -13,8 +13,8 @@
   },
 
   "background": {
-    "scripts": [ "background.js" ],
-    "persistent": true
+    "service_worker": [ "background.js" ],
+    "type": "module"
   },
   "content_scripts": [{
       "matches": [
