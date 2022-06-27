@@ -36,7 +36,7 @@
     "managed_schema": "schema.json"
   },
 
-  "minimum_chrome_version": "69",
+  "minimum_chrome_version": "88",
   "permissions": [
     "tabs",
     "webRequest",
