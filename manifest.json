@@ -13,21 +13,19 @@
   },
 
   "background": {
-    "service_worker": [ "background.js" ],
-    "type": "module"
+    "service_worker": "background-wrapper.js"
   },
   "content_scripts": [{
       "matches": [
         "https://holmes-stage.caregroup.org/*",
-        "https://holmes-test.caregroup.org/*",
         "https://holmes.caregroup.org/*"
       ],
       "js": [ "webOMR-framePrint.js" ],
       "run_at": "document_idle"
   }],
-  "browser_action": {
+  "action": {
     "default_popup": "options.html"
-	},
+  },
   "options_ui": {
     "page": "options.html",
     "open_in_tab": false
@@ -38,13 +36,13 @@
 
   "minimum_chrome_version": "88",
   "permissions": [
-    "tabs",
-    "webRequest",
-    "webRequestBlocking",
-    "<all_urls>"
+    "tabs"
   ],
   "web_accessible_resources": [
-    "assets/*.json",
-    "assets/*.png"
+    { 
+      "matches": ["<all_urls>"],
+      "resources": [ "assets/*.json", "assets/*.png" ],
+      "use_dynamic_url": true
+    }
   ]
 }

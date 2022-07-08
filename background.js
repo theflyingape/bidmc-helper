@@ -2,6 +2,10 @@
  *  BIDMC managed Chrome OS - Helper extension  *
 \************************************************/
 
+function backgroundFunction() {
+    alert('Background, reporting for duty!')
+}
+
 let badge = false;
 
 chrome.storage.managed.get(function(policy) {
@@ -24,7 +28,7 @@ if (policy.UserAgent && policy.UserAgent.length) {
     chrome.webRequest.onBeforeSendHeaders.addListener(
         function(details) {
             if (badge) {
-                chrome.browserAction.setBadgeText({text: ''});
+                chrome.action.setBadgeText({text: ''});
                 badge = false;
             }
             if (/^(http|https):\/\/?.*/i.test(details.url)) {
